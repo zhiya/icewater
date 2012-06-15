@@ -1,0 +1,33 @@
+
+body{
+  background-color: #89A;
+}
+
+.logview-page{
+  position: relative;
+  width: 1000px;
+  margin: 0 auto;
+  padding: 25px 50px;
+  background-color: #FFF;
+}
+
+.title{
+  text-align: center;
+  font-size: 18px;
+}
+
+.clear{
+  clear: both;
+}
+
+.logview{
+  margin: 50px;
+  background-color: #BBB;
+}
+
+.readme{
+  text-align: left;
+  font-size: 12px;
+  padding: 5px 50px;
+}
+

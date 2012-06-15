@@ -1,0 +1,24 @@
+!!!5
+html
+  include block/header
+    script
+      $(function(){
+        var ds = !{datastr};
+
+        var viewroot = $(".logview-page");
+        if( ds.readme ){
+          $("<div class='readme'>"+ds.readme+"</div><hr>").appendTo(viewroot);
+        }
+        var lvi = 1;
+        ds.records.forEach(function(dd){
+          var id = "logview" + lvi++;
+          var elem_obj = $("<div class='logview' id='"+ id +"'></div>");
+          elem_obj.appendTo(viewroot);
+          new RaphChart(id,dd).generate();
+        });
+      });
+  body
+    .logview-page
+      h1.title= title
+      br
+

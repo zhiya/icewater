@@ -1,0 +1,1 @@
+exports.struct = require('./struct');

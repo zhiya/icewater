@@ -1,0 +1,12 @@
+!!!5
+html
+  include block/header
+  body
+    hr
+    - if(files.length)
+    - files.forEach(function(file){
+    - var url='/log/'+file;
+    a(href= url)#{file}
+    br
+    - });
+
