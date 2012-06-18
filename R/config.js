@@ -1,12 +1,13 @@
 exports.log = {
-  path: '/Users/Vendar/Documents/benchmark/test/',
+  path: '/root/work/trunk/script/',
   records: [
     'cores.txt',
     'cpu-mem.txt',
     'socket.txt',
-    //'tcp-em1-pkg.txt',
-    //'tcp-em1-size.txt',
+    'tcp-em1-pkg.txt',
+    'tcp-em1-size.txt',
+    'conn-task.txt',
   ],
-  readme: 'README'
+  readme: 'README',
 };
 

@@ -57,9 +57,12 @@ exports.list = function(callback){
     var filenames = [];
     files.forEach(function(file){
       try {
-        var stats = fs.statSync(config.log.path+file);
-        if(stats && stats.isDirectory()){
-          filenames.push(file);
+        var dt = file.match(/[0-9]{2,4}-[0-9]{2}-[0-9]{2}/g);
+        if(dt && dt.length && dt.length>1){
+          var stats = fs.statSync(config.log.path+file);
+          if(stats && stats.isDirectory()){
+            filenames.push(file);
+          }
         }
       }catch(error){
         console.log(error);
