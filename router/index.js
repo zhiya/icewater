@@ -13,7 +13,7 @@ exports.apply = function(app){
       }else{
         res.render('log-list', {
           title: 'icewater-loglist',
-          files: files
+          fileliststr: JSON.stringify(files)
         });
       }
     });

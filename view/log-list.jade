@@ -1,6 +1,12 @@
 !!!5
 html
   include block/header
+    script
+      var filenames = !{fileliststr};
+      $(function(){
+        filenames.forEach(function(filename){
+        });
+      });
   body
     hr
     - if(files.length)

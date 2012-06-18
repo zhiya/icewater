@@ -1,8 +1,4 @@
 
-body{
-  background-color: #89A;
-}
-
 .logview-page{
   position: relative;
   width: 1000px;
@@ -29,5 +25,30 @@ body{
   text-align: left;
   font-size: 12px;
   padding: 5px 50px;
+}
+
+/*log list text style*/
+.loglist-date{
+  margin: 5px;
+}
+
+.loglist-am{
+  padding: 5px 20px;
+  color: #F33;
+}
+
+.loglist-pm{
+  padding: 5px 20px;
+  color: #33F;
+}
+
+.loglist-amentry{
+  padding: 10px;
+  color: #A33;
+}
+
+.loglist-pmentry{
+  padding: 10px;
+  color: #33A;
 }
 
