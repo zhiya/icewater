@@ -32,6 +32,7 @@ function RaphChart(elemid,data){
   });
 };
 RaphChart.prototype.generate = function(){
+  if(this.ks.length<=0||this.vs.length<=0)return ;
   this.linechart = this.r.linechart(
     this.chart_x0,
     this.chart_y0,
@@ -40,8 +41,32 @@ RaphChart.prototype.generate = function(){
     this.ks,this.vs,{
       nostroke: false,
       axis: "0 0 1 1",
+      //symbol: "circle",
       smooth: true
   });
+
+  /*
+  //set dot symbols
+  this.linechart.symbols.attr({
+    r: 1,
+    stroke: "#FFF"
+  });
+
+  //hover action
+  var self = this;
+  this.linechart.hoverColumn(function(){
+    this.tags = self.r.set();
+    for(var i=0,ii=this.y.length;i<ii;++i){
+      this.tags.push(
+        self.r.tag(this.x,this.y[i],this.values[i],160,10)
+        .insertBefore(this)
+        .attr([{fill:"#FFF"},{fill:this.symbols[i].attr("fill")}]));
+    }
+  },function(){
+    this.tags && this.tags.remove();
+  });
+  */
+
   var items = this.linechart.axis[0].text.items;
   var lx = 0;
   for(var i=0;i<items.length;++i){
@@ -69,5 +94,4 @@ RaphChart.prototype.generate = function(){
     this.title_y += this.title_ys;
   }
 };
-
 
