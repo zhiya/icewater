@@ -1,18 +1,42 @@
 !!!5
 html
   include block/header
+    script(src='/js/jquery.sortElements.js')
     script
       var filenames = !{fileliststr};
+      var dtre = /[0-9]{2,4}-[0-9]{2}-[0-9]{2}/g;
       $(function(){
+        function ensureDate(ymd){
+          var ymdobj = null;
+          if($("#"+ymd).length<=0){
+            ymdobj = $(
+            "<br><div class='loglist-date' id='"+ymd+"'>"+ymd+
+              "<div id='"+ymd+"am' class='loglist-am'></div>"+
+              "<div id='"+ymd+"pm' class='loglist-pm'></div>"+
+            "</div><hr>");
+            ymdobj.appendTo("#loglist");
+          }
+          return ymdobj;
+        };
+        function addEntry(ymd,d){
+          ensureDate(ymd);
+
+          var noonstr = "am";
+          var da = d.split("-");
+          if(Number(da[0])>12){
+            noonstr = "pm";
+          }
+          var pn = $("#"+ymd+noonstr);
+          $("<a class='loglist-"+noonstr+"entry' href='log/log."+ymd+"_"+d+"'>"+d+"</a>").appendTo(pn);
+          pn.find(".loglist-"+noonstr+"entry").sortElements(function(a,b){
+            return $(a).text()>$(b).text()?1:-1;
+          });
+        };
         filenames.forEach(function(filename){
+          var dts = filename.match(dtre);
+          addEntry(dts[0],dts[1]);
         });
       });
   body
-    hr
-    - if(files.length)
-    - files.forEach(function(file){
-    - var url='/log/'+file;
-    a(href= url)#{file}
-    br
-    - });
+    #loglist
 

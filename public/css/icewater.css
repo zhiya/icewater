@@ -29,26 +29,26 @@
 
 /*log list text style*/
 .loglist-date{
-  margin: 5px;
+  margin: 20px;
 }
 
 .loglist-am{
-  padding: 5px 20px;
+  margin: 20px;
   color: #F33;
 }
 
 .loglist-pm{
-  padding: 5px 20px;
+  margin: 20px;
   color: #33F;
 }
 
 .loglist-amentry{
-  padding: 10px;
+  margin: 5px;
   color: #A33;
 }
 
 .loglist-pmentry{
-  padding: 10px;
+  margin: 5px;
   color: #33A;
 }
 
