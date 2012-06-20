@@ -27,7 +27,7 @@ html
             noonstr = "pm";
           }
           var pn = $("#"+ymd+noonstr);
-          $("<a class='loglist-"+noonstr+"entry' href='log/log."+ymd+"_"+d+"'>"+d+"</a>").appendTo(pn);
+          $("<a class='loglist-"+noonstr+"entry' href='/log/log."+ymd+"_"+d+"'>"+d+"</a>").appendTo(pn);
           pn.find(".loglist-"+noonstr+"entry").sortElements(function(a,b){
             return $(a).text()>$(b).text()?1:-1;
           });
