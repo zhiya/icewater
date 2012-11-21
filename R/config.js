@@ -1,5 +1,5 @@
 exports.log = {
-  path: '/root/work/trunk/script/',
+  path: __dirname+'/../logs/',
   records: [
     'cores.txt',
     'cpu-mem.txt',
