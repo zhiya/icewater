@@ -12,5 +12,5 @@ fi
 mv ./logs/log $destlogfile
 
 cd $destlogfile
-../prepare-log.sh
+../script/prepare-log.sh
 
