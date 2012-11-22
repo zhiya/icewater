@@ -45,7 +45,7 @@ echo "Done!"
 
 echo "Generating TCP ..."
 sed -e 's/[时分]/:/g' -e 's/秒//g' -e 's/ [PA]M//g' tcp.log>tcp.log.tmp
-nics=`./getnics.sh`
+nics=`../../script/getnics.sh`
 for nic in ${nics[@]};do
     grep $nic tcp.log.tmp|awk -v tag=$nic 'BEGIN{print("TIME",tag "rxpck/s",tag "txpck/s")}{print($1,$3,$4)}'>tcp-$nic-pkg.$sfx
     grep $nic tcp.log.tmp|awk -v tag=$nic 'BEGIN{print("TIME",tag "rxkb/s",tag "txkb/s")}{print($1,$5,$6)}'>tcp-$nic-size.$sfx
