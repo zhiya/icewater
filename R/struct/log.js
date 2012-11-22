@@ -76,13 +76,24 @@ exports.view = function(log,callback){
   if(typeof callback != 'function'){
     callback = function(){};
   }
-  fs.stat(config.log.path+log,function(error,stats){
+  var path = config.log.path+log;
+  fs.stat(path,function(error,stats){
     if(error) return callback(error);
     if(stats.isDirectory()){
-      var _total = config.log.records.length;
+      var files = fs.readdirSync(path);
+      var items = [];
+      for(var i=0;i<files.length;++i){
+        if(config.log.pattern.test(files[i])){
+          items.push(files[i]);
+        }
+      }
+      var _total = items.length;
       var _finished = 0;
       var td = [];
-      config.log.records.forEach(function(logfile){
+      if(_total<=0){
+        return callback('No logs there!');
+      }
+      items.forEach(function(logfile){
         parseLogFile(config.log.path+log+'/'+logfile,
           function(error,data){
           _finished++;
