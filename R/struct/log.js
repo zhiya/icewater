@@ -87,6 +87,7 @@ exports.view = function(log,callback){
           items.push(files[i]);
         }
       }
+      items.sort();
       var _total = items.length;
       var _finished = 0;
       var td = [];
