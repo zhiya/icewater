@@ -5,6 +5,7 @@ html
     script
       var filenames = !{fileliststr};
       var dtre = /[0-9]{2,4}-[0-9]{2}-[0-9]{2}/g;
+      var started = !{started};
       $(function(){
         function ensureDate(ymd){
           var ymdobj = null;
@@ -36,7 +37,40 @@ html
           var dts = filename.match(dtre);
           addEntry(dts[0],dts[1]);
         });
+
+        $('#trigger_mon').click(function(){
+          var geturl = '/api/monitor/stop';
+          if(!started){
+            var moninterv = 30;
+            try{
+              moninterv = parseInt($('#mon_interval').val());
+            }catch(error){
+              moninterv = 30;
+            }
+            geturl = '/api/monitor/start?interval='+moninterv;
+          }
+          $.get(geturl,function(result){
+            if(result.error){
+              return alert(result.error);
+            }
+            if(started){
+              return location.reload();
+            }
+            started = !started;
+            updateController();
+          });
+        });
+        function updateController(){
+          $('#trigger_mon').html(started?'完成监控':'开始监控');
+        };
+        updateController();
+        $('#mon_interval').val(!{interval});
       });
   body
+    label 数据采集间隔(秒):
+      input#mon_interval(type='text')
+    a#trigger_mon(href='#')开始监控
+
+    hr
     #loglist
 
