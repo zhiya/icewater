@@ -41,6 +41,26 @@ RaphChart.prototype.generate = function(){
     this.ks,this.vs,{
       nostroke: false,
       axis: "0 0 1 1",
+      colors: [
+        '#FF0033',
+        '#663366',
+        '#00FFCC',
+        '#009900',
+        '#990033',
+        '#FF66FF',
+        '#660099',
+        '#FFFFCC',
+        '#99FFFF',
+        '#FF9999',
+        '#CC99CC',
+        '#330066',
+        '#FF9966',
+        '#66FF66',
+        '#669999',
+        '#990099',
+        '#FF00CC',
+        '#000033',
+      ],
       //symbol: "circle",
       smooth: true
   });
