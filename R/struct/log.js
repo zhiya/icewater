@@ -2,6 +2,10 @@ var config = require('../config');
 
 var fs = require('fs');
 
+try{
+  fs.mkdirSync(config.log.path);
+}catch(error){}
+
 function isValidLogFile(filename){
   try{
     var fd = fs.openSync(filename,'r');
@@ -51,35 +55,29 @@ exports.list = function(callback){
   if(typeof callback != 'function'){
     callback = function(){};
   }
-
   try{
-    fs.closeSync(fs.openSync(config.log.path));
+    fs.readdir(config.log.path,function(error,files){
+      if(error) return callback(error);
+
+      var filenames = [];
+      files.forEach(function(file){
+        try {
+          var dt = file.match(/[0-9]{2,4}-[0-9]{2}-[0-9]{2}/g);
+          if(dt && dt.length && dt.length>1){
+            var stats = fs.statSync(config.log.path+file);
+            if(stats && stats.isDirectory()){
+              filenames.push(file);
+            }
+          }
+        }catch(error){
+          console.log(error);
+        }
+      });
+      callback(null,filenames);
+    });
   }catch(error){
-    try{
-      fs.mkdirSync(config.log.path);
-    }catch(error){}
     return callback(null,[]);
   }
-
-  fs.readdir(config.log.path,function(error,files){
-    if(error) return callback(error);
-
-    var filenames = [];
-    files.forEach(function(file){
-      try {
-        var dt = file.match(/[0-9]{2,4}-[0-9]{2}-[0-9]{2}/g);
-        if(dt && dt.length && dt.length>1){
-          var stats = fs.statSync(config.log.path+file);
-          if(stats && stats.isDirectory()){
-            filenames.push(file);
-          }
-        }
-      }catch(error){
-        console.log(error);
-      }
-    });
-    callback(null,filenames);
-  });
 };
 
 exports.view = function(log,callback){
