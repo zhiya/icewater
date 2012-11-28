@@ -51,6 +51,14 @@ exports.list = function(callback){
   if(typeof callback != 'function'){
     callback = function(){};
   }
+
+  try{
+    fs.closeSync(fs.openSync(config.log.path));
+  }catch(error){
+    fs.mkdirSync(config.log.path);
+    return callback(null,[]);
+  }
+
   fs.readdir(config.log.path,function(error,files){
     if(error) return callback(error);
 
